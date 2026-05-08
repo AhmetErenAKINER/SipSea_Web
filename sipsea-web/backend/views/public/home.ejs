@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html class="dark" lang="tr">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>SipSea Soft | Yeni Nesil Yazılım Çözümleri</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+      rel="stylesheet"
+    />
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "secondary-container": "#2f486a",
+              "primary-fixed": "#d9e4ed",
+              "on-error": "#690005",
+              "on-background": "#e2e2e2",
+              "tertiary-container": "#040404",
+              "surface-container": "#1e2020",
+              primary: "#bdc8d1",
+              "secondary-fixed": "#d4e3ff",
+              "outline-variant": "#43474a",
+              "on-tertiary-fixed-variant": "#464747",
+              "on-primary-fixed": "#131d23",
+              background: "#121414",
+              tertiary: "#c7c6c6",
+              "surface-container-highest": "#333535",
+              "on-primary": "#283239",
+              "inverse-on-surface": "#2f3131",
+              secondary: "#afc8f0",
+              "on-surface-variant": "#c4c7ca",
+              "error-container": "#93000a",
+              "surface-bright": "#37393a",
+              "primary-container": "#00050a",
+              "on-surface": "#e2e2e2",
+              error: "#ffb4ab",
+              "tertiary-fixed": "#e4e2e2",
+              "surface-container-low": "#1a1c1c",
+              "secondary-fixed-dim": "#afc8f0",
+              "on-tertiary-container": "#777777",
+              "tertiary-fixed-dim": "#c7c6c6",
+              "surface-variant": "#333535",
+              "surface-container-lowest": "#0c0f0f",
+              "surface-dim": "#121414",
+              outline: "#8e9195",
+              "on-tertiary-fixed": "#1b1c1c",
+              "surface-tint": "#bdc8d1",
+              "on-primary-fixed-variant": "#3e484f",
+              "on-secondary-container": "#9eb7de",
+              "on-secondary-fixed": "#001c3a",
+              "inverse-surface": "#e2e2e2",
+              "on-error-container": "#ffdad6",
+              "on-secondary": "#163152",
+              surface: "#121414",
+              "surface-container-high": "#282a2b",
+              "on-secondary-fixed-variant": "#2f486a",
+              "inverse-primary": "#556067",
+              "primary-fixed-dim": "#bdc8d1",
+              "on-tertiary": "#303031",
+              "on-primary-container": "#6e7880"
+            },
+            borderRadius: {
+              DEFAULT: "0.125rem",
+              lg: "0.25rem",
+              xl: "0.5rem",
+              full: "0.75rem"
+            },
+            spacing: {
+              unit: "4px",
+              gutter: "24px",
+              "bento-gap": "16px",
+              margin: "48px"
+            },
+            fontFamily: {
+              "headline-lg": ["Inter"],
+              "body-lg": ["Inter"],
+              "label-caps": ["Inter"],
+              "headline-xl": ["Inter"],
+              "body-md": ["Inter"],
+              "headline-md": ["Inter"]
+            },
+            fontSize: {
+              "headline-lg": [
+                "48px",
+                {
+                  lineHeight: "1.2",
+                  letterSpacing: "-0.02em",
+                  fontWeight: "600"
+                }
+              ],
+              "body-lg": [
+                "18px",
+                {
+                  lineHeight: "1.6",
+                  letterSpacing: "0em",
+                  fontWeight: "400"
+                }
+              ],
+              "label-caps": [
+                "12px",
+                {
+                  lineHeight: "1.0",
+                  letterSpacing: "0.1em",
+                  fontWeight: "600"
+                }
+              ],
+              "headline-xl": [
+                "80px",
+                {
+                  lineHeight: "1.1",
+                  letterSpacing: "-0.04em",
+                  fontWeight: "700"
+                }
+              ],
+              "body-md": [
+                "16px",
+                {
+                  lineHeight: "1.5",
+                  letterSpacing: "0em",
+                  fontWeight: "400"
+                }
+              ],
+              "headline-md": [
+                "32px",
+                {
+                  lineHeight: "1.3",
+                  letterSpacing: "-0.01em",
+                  fontWeight: "600"
+                }
+              ]
+            }
+          }
+        }
+      };
+    </script>
+    <link rel="stylesheet" href="/static/styles.css" />
+    <style>
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        background-color: #121414;
+        color: #e2e2e2;
+        overflow-x: hidden;
+        transition: background-color 1.8s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      .surface-wave-layer {
+        position: fixed;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
+        background-image:
+          linear-gradient(
+            to right,
+            rgba(255, 255, 255, 0.06) 0,
+            rgba(255, 255, 255, 0.06) 1px,
+            transparent 1px,
+            transparent 25%
+          ),
+          radial-gradient(circle at 20% 10%, rgba(189, 200, 209, 0.12) 0%, transparent 45%),
+          radial-gradient(circle at 80% 20%, rgba(130, 150, 175, 0.12) 0%, transparent 40%),
+          linear-gradient(180deg, rgba(18, 28, 36, 0.62) 0%, rgba(10, 18, 24, 0.86) 100%);
+        background-size: 320px 100%, auto, auto, auto;
+        background-position: center, center, center, center;
+        background-repeat: repeat, no-repeat, no-repeat, no-repeat;
+        opacity: 0.34;
+        filter: saturate(0.8) brightness(0.72) contrast(1.08);
+        transition: opacity 1.2s ease, transform 1.2s ease;
+      }
+      .depth-darken-layer {
+        position: fixed;
+        inset: 0;
+        z-index: 1;
+        pointer-events: none;
+        background: linear-gradient(
+          to bottom,
+          rgba(8, 14, 22, 0.08) 0%,
+          rgba(3, 8, 14, 0.28) 40%,
+          rgba(1, 3, 7, 0.72) 75%,
+          rgba(0, 0, 0, 0.92) 100%
+        );
+        opacity: 0.35;
+        transition: opacity 1.2s ease;
+      }
+      .glass-panel {
+        background: rgba(30, 32, 32, 0.4);
+        backdrop-filter: blur(25px);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+      }
+      .frosted-water {
+        background: linear-gradient(
+          135deg,
+          rgba(189, 200, 209, 0.03) 0%,
+          rgba(18, 20, 20, 0.6) 100%
+        );
+        border: 1px solid rgba(189, 200, 209, 0.08);
+      }
+      .diving-glow {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        pointer-events: none;
+        z-index: 2;
+        background: radial-gradient(
+          circle at 50% 0%,
+          rgba(189, 200, 209, 0.12) 0%,
+          transparent 70%
+        );
+        mix-blend-mode: soft-light;
+      }
+      .seigaiha-pattern {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        pointer-events: none;
+        z-index: 0;
+        opacity: 0.22;
+        background-image: url("/static/images/background/sea-pattern-wave.png");
+        background-size: 360px;
+        background-repeat: repeat;
+        background-position: center;
+        mask-image: linear-gradient(to bottom, black 0%, transparent 100%);
+        -webkit-mask-image: linear-gradient(
+          to bottom,
+          black 0%,
+          transparent 100%
+        );
+      }
+      .hero-wave-graphic {
+        position: absolute;
+        top: 10%;
+        right: -5%;
+        width: 70%;
+        max-width: 1200px;
+        opacity: 0;
+        z-index: 0;
+        filter: contrast(1.1) brightness(1.2) grayscale(0.5);
+        pointer-events: none;
+        mask-image: radial-gradient(
+          circle at center,
+          black 0%,
+          transparent 80%
+        );
+        -webkit-mask-image: radial-gradient(
+          circle at center,
+          black 0%,
+          transparent 80%
+        );
+      }
+      .atmospheric-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: radial-gradient(
+          circle at 50% -20%,
+          rgba(189, 200, 209, 0.08) 0%,
+          transparent 80%
+        );
+        pointer-events: none;
+        z-index: 1;
+      }
+      .material-symbols-outlined {
+        font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+      }
+      select.quote-select {
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        background-color: #121414 !important;
+        color: #e2e2e2 !important;
+        color-scheme: dark;
+      }
+      select.quote-select option {
+        background-color: #121414 !important;
+        color: #e2e2e2 !important;
+      }
+      input.quote-field,
+      textarea.quote-field {
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        background-color: #121414 !important;
+        color: #e2e2e2 !important;
+        color-scheme: dark;
+      }
+      .quote-field::placeholder {
+        color: #8e9195;
+      }
+      .quote-field:-webkit-autofill,
+      .quote-field:-webkit-autofill:hover,
+      .quote-field:-webkit-autofill:focus {
+        -webkit-text-fill-color: #e2e2e2;
+        -webkit-box-shadow: 0 0 0 1000px #121414 inset;
+        transition: background-color 9999s ease-out 0s;
+      }
+      /** Sabit navbar alt menüsü taşmalı görünsün + hover hep çalışsın */
+      .home-top-navbar {
+        overflow: visible !important;
+      }
+      .home-nav-links {
+        overflow: visible;
+      }
+      @media (min-width: 768px) {
+        .home-top-navbar .nav-products-dropdown:hover .nav-products-menu-desktop {
+          display: block !important;
+        }
+      }
+      @media (max-width: 767px) {
+        .nav-products-menu-desktop {
+          display: none !important;
+        }
+      }
+    </style>
+  </head>
+  <body class="font-body-md antialiased" style="background-color: #121414">
+    <div class="surface-wave-layer" id="surfaceWaveLayer"></div>
+    <div class="depth-darken-layer" id="depthDarkenLayer"></div>
+    <div class="seigaiha-pattern" id="seigaiha"></div>
+    <div class="diving-glow" id="divingGlow"></div>
+    <div class="atmospheric-overlay" id="atmos" style="opacity: 1"></div>
+    <%- include("../partials/public-navbar", { navMode: "landing" }) %>
+
+    <div class="depth-wrapper">
+      <!-- Hero Section -->
+      <section
+        id="top"
+        class="relative min-h-[1024px] flex flex-col justify-center px-8 pt-32 pb-16 overflow-hidden"
+      >
+        <div class="hero-wave-graphic" id="heroWave"></div>
+        <div class="max-w-7xl mx-auto w-full relative z-10">
+          <div class="max-w-4xl">
+            <span
+              class="font-label-caps text-primary uppercase tracking-[0.2em] mb-6 block"
+              ><%= settings.hero_badge_text || "Kuruluş 2026" %></span
+            >
+            <h1
+              class="font-headline-xl text-on-surface mb-8 tracking-tight"
+            >
+              <%= settings.hero_title_text || "Yeni Nesil Yazılım Mükemmelliği." %>
+            </h1>
+            <p
+              class="font-body-lg text-on-surface-variant max-w-2xl leading-relaxed"
+            >
+              <%= settings.hero_description_text || "Zekâ ile ölçeklenebilirliği dengeleyen dijital temeller tasarlıyoruz. Amacımız, karmaşık problemleri uzun ömürlü kod ile görünmez ve akıcı deneyimlere dönüştürmek." %>
+            </p>
+            <div class="mt-12 flex gap-6">
+              <a
+                href="#products"
+                class="bg-primary text-on-primary px-8 py-4 rounded-full font-label-caps hover:brightness-110 transition-all shadow-lg shadow-primary/10 text-sm"
+                >Ürünleri İncele</a
+              >
+              <a
+                href="#contact"
+                class="border border-outline-variant text-on-surface px-8 py-4 rounded-full font-label-caps hover:bg-surface-variant/20 transition-all backdrop-blur-sm text-sm"
+                >Teklif Talep Et</a
+              >
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Product Showcase (Bento Grid) -->
+      <section
+        class="py-32 px-8 max-w-7xl mx-auto relative z-10 transition-all duration-1000"
+        id="products"
+      >
+        <div class="mb-16">
+          <h2
+            class="font-headline-lg text-on-surface mb-4 tracking-tight"
+          >
+            <%= settings.products_section_title || "Ürün Vitrini" %>
+          </h2>
+          <p class="font-body-md text-on-surface-variant">
+            <%= settings.products_section_description || "Modern verimliliğin yazılım mimarisi." %>
+          </p>
+        </div>
+
+        <div
+          class="grid grid-cols-1 md:grid-cols-12 gap-bento-gap auto-rows-[300px]"
+        >
+          <% const primaryProduct = products && products.length ? products[0] : null; %>
+          <% const secondaryProduct = products && products.length > 1 ? products[1] : null; %>
+          <% const tertiaryProduct = products && products.length > 2 ? products[2] : null; %>
+          <!-- DealMate -->
+          <div<% if (primaryProduct) { %> id="<%= primaryProduct.slug %>"<% } %>
+            class="md:col-span-8 md:row-span-2 frosted-water glass-panel p-10 rounded-xl group relative overflow-hidden scroll-mt-24"
+          >
+            <% if (primaryProduct && primaryProduct.cover_image_path) { %>
+              <img
+                src="<%= primaryProduct.cover_image_path %>"
+                alt="<%= primaryProduct.title %>"
+                class="absolute inset-0 w-full h-full object-cover opacity-25"
+              />
+            <% } %>
+            <div class="relative z-10 h-full flex flex-col">
+              <span class="font-label-caps text-primary mb-4 block"
+                ><%= (primaryProduct && primaryProduct.tech_stack) ? primaryProduct.tech_stack : "MOBİL PLATFORM" %></span
+              >
+              <h3
+                class="font-headline-md text-on-surface mb-4 tracking-tight"
+              >
+                <%= primaryProduct ? primaryProduct.title : "DealMate" %>
+              </h3>
+              <p
+                class="font-body-md text-on-surface-variant max-w-md"
+              >
+                <%= (primaryProduct && primaryProduct.summary) ? primaryProduct.summary : "Yuksek hacimli islemler ve hizli yayginlastirma icin tasarlanmis gelismis bir pazar yeri motoru." %>
+              </p>
+            </div>
+          </div>
+
+          <!-- Placeholder for other products -->
+          <div<% if (secondaryProduct) { %> id="<%= secondaryProduct.slug %>"<% } %>
+            class="md:col-span-4 md:row-span-1 frosted-water glass-panel p-8 rounded-xl flex flex-col justify-between scroll-mt-24"
+          >
+            <div>
+              <span class="font-label-caps text-primary mb-2 block"
+                ><%= (secondaryProduct && secondaryProduct.tech_stack) ? secondaryProduct.tech_stack : "WEB ÇOZUMLERI" %></span
+              >
+              <h3
+                class="font-headline-md text-on-surface tracking-tight"
+              >
+                <%= secondaryProduct ? secondaryProduct.title : "Ozel Web Siteleri" %>
+              </h3>
+            </div>
+            <p class="font-body-md text-on-surface-variant">
+              <%= (secondaryProduct && secondaryProduct.summary) ? secondaryProduct.summary : "WordPress tabanli cozumlerden tamamen kodlanmis arayuzlere kadar olceklenebilir yapilar." %>
+            </p>
+          </div>
+
+          <div<% if (tertiaryProduct) { %> id="<%= tertiaryProduct.slug %>"<% } %>
+            class="md:col-span-4 md:row-span-1 frosted-water glass-panel p-8 rounded-xl overflow-hidden scroll-mt-24 <%= tertiaryProduct && tertiaryProduct.cover_image_path ? 'relative' : '' %>"
+          >
+            <% if (tertiaryProduct && tertiaryProduct.cover_image_path) { %>
+              <img
+                src="<%= tertiaryProduct.cover_image_path %>"
+                alt="<%= tertiaryProduct.title %>"
+                class="absolute inset-0 w-full h-full object-cover opacity-20 pointer-events-none"
+              />
+            <% } %>
+            <div
+              class="relative z-10 h-full flex flex-col justify-center items-center text-center px-2"
+            >
+              <% if (tertiaryProduct) { %>
+                <span class="font-label-caps text-primary mb-3 block tracking-wide uppercase"
+                  ><%= tertiaryProduct.tech_stack || "Platform" %></span
+                >
+                <h4
+                  class="font-headline-md text-on-surface text-xl tracking-tight"
+                >
+                  <%= tertiaryProduct.title %>
+                </h4>
+                <% if (tertiaryProduct.summary) { %>
+                  <p class="font-body-md text-on-surface-variant text-sm mt-3 max-w-xs">
+                    <%= tertiaryProduct.summary %>
+                  </p>
+                <% } %>
+              <% } else { %>
+                <span
+                  class="material-symbols-outlined text-4xl text-primary mb-4"
+                  >insights</span
+                >
+                <h4
+                  class="font-headline-md text-on-surface text-xl tracking-tight"
+                >
+                  Core Analytics
+                </h4>
+                <p class="font-body-md text-on-surface-variant text-sm mt-2">
+                  Geliştirdiğimiz her platform için yerleşik analitik ve içgörü.
+                </p>
+              <% } %>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Founders -->
+      <section
+        class="py-32 relative z-10 transition-all duration-1000"
+        id="founders"
+      >
+        <div class="px-8 max-w-7xl mx-auto">
+          <div class="mb-16 text-center">
+            <h2
+              class="font-headline-xl text-on-surface mb-6 tracking-tight"
+            >
+              <%= settings.founders_section_title || "Vizyonumuz." %>
+            </h2>
+            <p
+              class="font-headline-md text-primary max-w-3xl mx-auto opacity-80 leading-tight"
+            >
+              "Yazılımın taş kadar sağlam, düşünce kadar akışkan olması
+              gerektiğine inanıyoruz."
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+            <% founders.forEach(founder => { %>
+              <div class="flex flex-col items-center">
+                <div
+                  class="w-full aspect-[3/4] bg-surface-container-low rounded-xl mb-6 overflow-hidden border border-white/5 flex items-center justify-center text-on-surface-variant text-sm"
+                >
+                  <% if (founder.photo_path) { %>
+                    <img src="<%= founder.photo_path %>" alt="<%= founder.full_name %>" class="w-full h-full object-cover" />
+                  <% } else { %>
+                    Co-founder photo placeholder
+                  <% } %>
+                </div>
+                <h4
+                  class="font-headline-md text-2xl text-on-surface tracking-tight"
+                >
+                  <%= founder.full_name %>
+                </h4>
+                <p class="font-label-caps text-primary mt-1">
+                  <%= founder.role_title %>
+                </p>
+              </div>
+            <% }) %>
+          </div>
+        </div>
+      </section>
+
+      <!-- Contact -->
+      <section
+        class="py-32 px-8 bg-surface-container-lowest relative z-20"
+        id="contact"
+      >
+        <div class="max-w-6xl mx-auto space-y-10">
+          <div
+            id="quote"
+            class="glass-panel p-16 rounded-xl border border-white/5 max-w-3xl mx-auto shadow-[0_0_50px_rgba(0,0,0,0.8)]"
+          >
+          <div class="mb-12">
+            <h2
+              class="font-headline-md text-on-surface mb-4 tracking-tight"
+            >
+              <%= settings.quote_section_title || "Projeni Başlat." %>
+            </h2>
+            <p class="font-body-md text-on-surface-variant">
+              <%= settings.quote_section_description || "Hedefini anlat, mimariyi ve altyapıyı biz tasarlayalım." %>
+            </p>
+          </div>
+          <% if (quoteMessage) { %>
+            <p class="mb-6 rounded-lg border border-primary/40 bg-primary/10 px-4 py-3 text-sm text-on-surface">
+              <%= quoteMessage %>
+            </p>
+          <% } %>
+          <form class="space-y-8" method="post" action="/teklif">
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+            <div>
+              <label class="font-label-caps text-primary block mb-2"
+                >AD SOYAD</label
+              >
+              <input
+                class="quote-field w-full border-b border-outline-variant focus:border-primary py-3 px-0 outline-none transition-all"
+                placeholder="Ahmet Yılmaz"
+                name="full_name"
+                type="text"
+                required
+              />
+            </div>
+            <div>
+              <label class="font-label-caps text-primary block mb-2"
+                >E-POSTA ADRESİ</label
+              >
+              <input
+                class="quote-field w-full border-b border-outline-variant focus:border-primary py-3 px-0 outline-none transition-all"
+                placeholder="ahmet@example.com"
+                name="email"
+                type="email"
+                required
+              />
+            </div>
+            <div>
+              <label class="font-label-caps text-primary block mb-2"
+                >PROJE TİPİ</label
+              >
+              <select
+                class="quote-select w-full border-b border-outline-variant focus:border-primary py-3 px-0 outline-none transition-all"
+                name="project_type"
+              >
+                <option value="">Seçiniz</option>
+                <option value="Mobil Uygulama">Mobil Uygulama</option>
+                <option value="Kurumsal Web Sitesi">Kurumsal Web Sitesi</option>
+                <option value="E-Ticaret">E-Ticaret</option>
+                <option value="Özel Yazılım">Özel Yazılım</option>
+                <option value="Diğer">Diğer</option>
+              </select>
+            </div>
+            <div>
+              <label class="font-label-caps text-primary block mb-2"
+                >BÜTÇE ARALIĞI</label
+              >
+              <select
+                class="quote-select w-full border-b border-outline-variant focus:border-primary py-3 px-0 outline-none transition-all"
+                name="budget_range"
+              >
+                <option value="">Seçiniz</option>
+                <option value="0 - 25.000 TL">0 - 25.000 TL</option>
+                <option value="25.000 - 75.000 TL">25.000 - 75.000 TL</option>
+                <option value="75.000 - 150.000 TL">75.000 - 150.000 TL</option>
+                <option value="150.000 TL+">150.000 TL+</option>
+              </select>
+            </div>
+            <div>
+              <label class="font-label-caps text-primary block mb-2"
+                >KISA AÇIKLAMA</label
+              >
+              <textarea
+                class="quote-field w-full border-b border-outline-variant focus:border-primary py-3 px-0 outline-none transition-all resize-none"
+                placeholder="Çözmemizi istediğiniz problemi kısaca anlatın..."
+                name="message"
+                rows="4"
+                required
+              ></textarea>
+            </div>
+            <button
+              class="w-full bg-primary text-on-primary py-4 rounded-full font-label-caps hover:brightness-110 transition-all uppercase tracking-widest mt-8"
+              type="submit"
+            >
+              Talep Gönder
+            </button>
+          </form>
+          </div>
+
+          <section id="contact-info" class="glass-panel rounded-xl border border-white/5 p-8">
+            <h3 class="font-headline-md text-on-surface mb-6 tracking-tight">
+              İletişim
+            </h3>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+              <article class="frosted-water rounded-lg border border-white/10 p-5">
+                <p class="font-label-caps text-primary mb-2">E-Posta</p>
+                <p class="font-body-md text-on-surface"><%= settings.contact_email || "example@gmail.com" %></p>
+              </article>
+              <article class="frosted-water rounded-lg border border-white/10 p-5">
+                <p class="font-label-caps text-primary mb-2">Telefon</p>
+                <p class="font-body-md text-on-surface"><%= settings.contact_phone || "+90 555 000 00 00" %></p>
+              </article>
+              <article class="frosted-water rounded-lg border border-white/10 p-5">
+                <p class="font-label-caps text-primary mb-2">Adres</p>
+                <p class="font-body-md text-on-surface"><%= settings.contact_address || "Istanbul, Turkiye" %></p>
+              </article>
+            </div>
+          </section>
+        </div>
+      </section>
+    </div>
+
+    <!-- Footer -->
+    <footer
+      class="bg-surface-container-lowest w-full py-12 border-t border-white/5 relative z-10"
+    >
+      <div
+        class="max-w-7xl mx-auto px-8 flex flex-col items-center gap-8"
+      >
+        <div
+          class="text-lg font-semibold text-on-surface font-inter tracking-tight"
+        >
+          SipSea Soft
+        </div>
+        <div class="text-on-surface-variant font-inter text-sm">
+          <%= settings.footer_copyright_text || "© 2026 SipSea Soft. Tüm hakları saklıdır." %>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      const navLinks = Array.from(document.querySelectorAll(".js-nav-link"));
+      const sectionOrder = ["top", "products", "founders", "quote", "contact-info"];
+
+      function setActiveNav(targetId) {
+        navLinks.forEach((link) => {
+          const isActive = link.dataset.navTarget === targetId;
+          link.classList.toggle("is-active", isActive);
+        });
+      }
+
+      function detectActiveSection() {
+        const sections = sectionOrder
+          .map((id) => document.getElementById(id))
+          .filter(Boolean);
+        const triggerLine = window.innerHeight * 0.36;
+        let activeId = "top";
+        const scrollBottom = window.scrollY + window.innerHeight;
+        const pageBottom = document.documentElement.scrollHeight;
+
+        sections.forEach((section) => {
+          const rect = section.getBoundingClientRect();
+          if (rect.top <= triggerLine) activeId = section.id;
+        });
+
+        // Ensure the final nav item can still become active near page end.
+        if (pageBottom - scrollBottom <= 24) {
+          activeId = "contact-info";
+        }
+
+        setActiveNav(activeId);
+      }
+
+      window.addEventListener("scroll", () => {
+        const scrollY = window.scrollY;
+        const windowHeight = window.innerHeight;
+        const docHeight = document.documentElement.scrollHeight;
+        const scrollPercent = scrollY / (docHeight - windowHeight);
+
+        const baseR = 18,
+          baseG = 20,
+          baseB = 20;
+        const abyssR = 0,
+          abyssG = 0,
+          abyssB = 0;
+
+        const divingProgress = Math.min(1, scrollPercent * 1.25);
+        const r = Math.max(
+          abyssR,
+          Math.floor(baseR - (baseR - abyssR) * divingProgress)
+        );
+        const g = Math.max(
+          abyssG,
+          Math.floor(baseG - (baseG - abyssG) * divingProgress)
+        );
+        const b = Math.max(
+          abyssB,
+          Math.floor(baseB - (baseB - abyssB) * divingProgress)
+        );
+        document.body.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
+
+        const divingGlow = document.getElementById("divingGlow");
+        const atmos = document.getElementById("atmos");
+        const surfaceWaveLayer = document.getElementById("surfaceWaveLayer");
+        const depthDarkenLayer = document.getElementById("depthDarkenLayer");
+
+        if (divingGlow) {
+          divingGlow.style.opacity = Math.max(0, 1 - scrollPercent * 1.25);
+        }
+
+        if (atmos) {
+          atmos.style.opacity = Math.max(0, 1 - scrollPercent * 1.6);
+        }
+
+        if (surfaceWaveLayer) {
+          surfaceWaveLayer.style.opacity = `${Math.max(0.04, 0.28 - scrollPercent * 0.24)}`;
+          surfaceWaveLayer.style.transform = `translateY(${scrollY * 0.08}px) scale(${1 + scrollPercent * 0.03})`;
+        }
+
+        if (depthDarkenLayer) {
+          depthDarkenLayer.style.opacity = `${Math.min(0.95, 0.35 + scrollPercent * 0.55)}`;
+        }
+
+        const seigaiha = document.getElementById("seigaiha");
+        const heroWave = document.getElementById("heroWave");
+
+        const surfaceFade = Math.max(0, 1 - scrollPercent * 2.2);
+
+        if (seigaiha) {
+          seigaiha.style.opacity = 0.15 * surfaceFade;
+          seigaiha.style.transform = `translateY(${scrollY * 0.15}px)`;
+        }
+
+        if (heroWave) {
+          heroWave.style.opacity = 0.35 * surfaceFade;
+          heroWave.style.transform = `translateY(${
+            scrollY * 0.25
+          }px) scale(${1 + scrollPercent * 0.1})`;
+        }
+
+        detectActiveSection();
+
+      });
+
+      (function () {
+        const adminReturnButton = document.getElementById("adminReturnButton");
+        if (!adminReturnButton) return;
+
+        adminReturnButton.addEventListener("click", function (event) {
+          const ref = document.referrer || "";
+          const sameOrigin = ref.startsWith(window.location.origin);
+          const cameFromAdmin = sameOrigin && ref.includes("/admin");
+          if (cameFromAdmin && window.history.length > 1) {
+            event.preventDefault();
+            window.history.back();
+          }
+        });
+      })();
+
+      detectActiveSection();
+    </script>
+  </body>
+</html>

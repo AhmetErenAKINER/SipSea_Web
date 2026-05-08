@@ -1,0 +1,25 @@
+# SipSea Web Backend
+
+Bu proje, derste anlatilan yapıya uygun olarak `router-controller-middleware-model` mimarisi ile hazirlanmistir.
+
+## Kurulum
+
+1. `cp .env.example .env` (Windows icin dosyayi kopyalayin)
+2. `npm install`
+3. MySQL'de `model/schema.sql` dosyasini calistirin (mevcut veritabani varsa yeni tablolarin olusmasi icin tekrar calistirin)
+4. `npm run seed:admin`
+5. `npm run dev`
+
+## Ilk Admin Girisi
+
+- E-posta: `erenakiner2003@gmail.com`
+- Sifre: `Admin123!` (ilk giristen sonra degistirin)
+
+## Kriter Karsiliklari
+
+- Dinamik sitemap: `/sitemap.xml`
+- IP kontrollu ziyaretci sayisi: `middleware/visitors.js`
+- Online kullanici: `middleware/onlineUsers.js`
+- Urun slug yapisi (admin icerik yonetimi): `utils/slug.js` + `products` tablosu
+- CSRF: `csurf` + `middleware/csrfLocal.js`
+- Galeri upload (local): `middleware/upload.js` + `gallery_images` tablosu

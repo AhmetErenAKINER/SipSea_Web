@@ -1,0 +1,76 @@
+<%- include("../partials/header") %>
+<section class="card">
+  <div class="admin-page-toolbar">
+    <a class="admin-back-link" href="/admin">← Geri</a>
+  </div>
+  <h1>Galeri</h1>
+  <form method="post" action="/admin/gallery?_csrf=<%= encodeURIComponent(csrfToken) %>" enctype="multipart/form-data">
+    <label>Baslik</label>
+    <input name="title" />
+    <label>Gorsel dosyasi</label>
+    <input type="file" name="image" accept="image/*" required />
+    <button type="submit">Yukle</button>
+  </form>
+</section>
+
+<section class="card">
+  <h2>Kurucu gorseli ata</h2>
+  <form method="post" action="/admin/gallery/founder-image">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+    <label>Kurucu</label>
+    <select name="founder_id" required>
+      <% founders.forEach(f => { %>
+        <option value="<%= f.id %>"><%= f.full_name %></option>
+      <% }) %>
+    </select>
+    <label>Gorsel yolu</label>
+    <input name="photo_path" placeholder="/uploads/gallery/ornek.png" required />
+    <button type="submit">Kurucu gorselini guncelle</button>
+  </form>
+</section>
+
+<section class="card">
+  <h2>Urun gorseli ata</h2>
+  <form method="post" action="/admin/gallery/product-image">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+    <label>Urun</label>
+    <select name="product_id" required>
+      <% products.forEach(p => { %>
+        <option value="<%= p.id %>"><%= p.title %></option>
+      <% }) %>
+    </select>
+    <label>Kapak gorseli yolu</label>
+    <input name="cover_image_path" placeholder="/uploads/gallery/ornek.png" required />
+    <button type="submit">Urun gorselini guncelle</button>
+  </form>
+</section>
+
+<section class="card">
+  <h2>Yuklenen gorseller</h2>
+  <p>Kopyalayip kullanabileceginiz yollar:</p>
+  <div class="gallery gallery-path-list">
+    <% rows.forEach(img => { %>
+      <figure>
+        <img src="<%= img.file_path %>" alt="<%= img.title %>" />
+        <figcaption class="gallery-caption">
+          <span class="gallery-meta"><%= img.title %> - <%= (img.file_size/1024).toFixed(1) %> KB</span>
+          <code class="gallery-path"><%= img.file_path %></code>
+          <div class="gallery-actions">
+            <form method="post" action="/admin/gallery/remove-usage">
+              <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+              <input type="hidden" name="file_path" value="<%= img.file_path %>" />
+              <button type="submit">Gorseli Kaldir</button>
+            </form>
+            <form method="post" action="/admin/gallery/delete" onsubmit="return confirm('Bu gorsel veritabanindan silinsin mi?');">
+              <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+              <input type="hidden" name="image_id" value="<%= img.id %>" />
+              <input type="hidden" name="file_path" value="<%= img.file_path %>" />
+              <button type="submit">DB'den Sil</button>
+            </form>
+          </div>
+        </figcaption>
+      </figure>
+    <% }) %>
+  </div>
+</section>
+<%- include("../partials/footer") %>

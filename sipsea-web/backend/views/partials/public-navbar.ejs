@@ -1,0 +1,82 @@
+<% const isLanding = typeof navMode === "string" && navMode === "landing"; %>
+<nav
+  class="home-top-navbar fixed top-0 w-full flex justify-between items-center px-8 h-16 z-50 overflow-visible bg-surface-container-lowest/40 backdrop-blur-xl border-b border-white/5 font-inter"
+>
+  <% if (isLanding) { %>
+    <div
+      class="text-xl font-bold text-on-surface font-inter tracking-tight flex items-center gap-2"
+    >
+      <img
+        src="/static/images/branding/sipsea-logo.png"
+        alt="SipSea Logo"
+        class="h-8 w-auto"
+      />
+      SipSea Soft
+    </div>
+  <% } else { %>
+    <a
+      href="/"
+      class="text-xl font-bold text-on-surface font-inter tracking-tight flex items-center gap-2 no-underline"
+    >
+      <img
+        src="/static/images/branding/sipsea-logo.png"
+        alt="SipSea Logo"
+        class="h-8 w-auto"
+      />
+      SipSea Soft
+    </a>
+  <% } %>
+  <div class="home-nav-links hidden md:flex gap-8 items-center relative z-[60]">
+    <% if (isLanding) { %>
+      <a
+        class="js-nav-link is-active text-on-surface-variant hover:text-on-surface font-inter tracking-tight duration-300 ease-in-out"
+        href="#top"
+        data-nav-target="top"
+        >Ana Sayfa</a>
+    <% } else { %>
+      <a
+        class="text-on-surface-variant hover:text-on-surface transition-colors font-inter tracking-tight duration-300 ease-in-out"
+        href="/"
+        >Ana Sayfa</a>
+    <% } %>
+    <span class="relative nav-products-dropdown inline-flex items-center">
+      <a
+        class="<%= isLanding ? 'js-nav-link ' : '' %>nav-products-trigger text-on-surface-variant hover:text-on-surface transition-colors font-inter tracking-tight duration-300 ease-in-out <%= (!isLanding && currentPath === '/urunler') ? 'text-on-surface border-b-2 border-primary pb-1' : (isLanding ? '' : 'border-b-2 border-transparent pb-1') %>"
+        href="<%= isLanding ? '#products' : '/#products' %>"
+        <%= isLanding ? 'data-nav-target="products"' : '' %>
+        >Ürünler</a>
+      <nav
+        class="nav-products-menu-desktop text-left shadow-2xl font-sans"
+        aria-label="Ürünler alt menüsü"
+      >
+        <% ((typeof navProducts !== "undefined" && navProducts) ? navProducts : []).forEach(p => { %>
+          <a href="<%= isLanding ? '#' + p.slug : '/#' + p.slug %>"><%= p.title %></a>
+        <% }) %>
+        <hr class="nav-submenu-divider" />
+        <a href="/urunler">Ürünlerimiz</a>
+      </nav>
+    </span>
+    <a
+      class="<%= isLanding ? 'js-nav-link ' : '' %>text-on-surface-variant hover:text-on-surface transition-colors font-inter tracking-tight duration-300 ease-in-out"
+      href="<%= isLanding ? '#founders' : '/#founders' %>"
+      <%= isLanding ? 'data-nav-target="founders"' : '' %>
+      >Kurucular</a>
+    <a
+      class="<%= isLanding ? 'js-nav-link ' : '' %>text-on-surface-variant hover:text-on-surface transition-colors font-inter tracking-tight duration-300 ease-in-out"
+      href="<%= isLanding ? '#quote' : '/#quote' %>"
+      <%= isLanding ? 'data-nav-target="quote"' : '' %>
+      >Teklif Ver</a>
+    <a
+      class="<%= isLanding ? 'js-nav-link ' : '' %>text-on-surface-variant hover:text-on-surface transition-colors font-inter tracking-tight duration-300 ease-in-out"
+      href="<%= isLanding ? '#contact-info' : '/#contact-info' %>"
+      <%= isLanding ? 'data-nav-target="contact-info"' : '' %>
+      >İletişim</a>
+  </div>
+  <a
+    href="<%= (currentUser && currentUser.role === 'admin') ? '/admin' : '/auth/login' %>"
+    id="<%= (currentUser && currentUser.role === 'admin') ? 'adminReturnButton' : '' %>"
+    class="bg-primary text-on-primary px-6 py-2 rounded-full font-label-caps hover:brightness-110 transition-all text-sm"
+  >
+    <%= (currentUser && currentUser.role === "admin") ? "Admin Panel" : "Admin Girişi" %>
+  </a>
+</nav>

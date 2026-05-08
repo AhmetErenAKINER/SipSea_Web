@@ -1,0 +1,29 @@
+<%- include("../partials/header") %>
+
+<% products.forEach((p, idx) => { %>
+  <section id="<%= p.slug %>" class="product-detail-strip <%= idx % 2 === 1 ? 'product-detail-strip-reverse' : '' %>">
+    <div class="product-detail-media frosted-pane">
+      <% if (p.cover_image_path) { %>
+        <img src="<%= p.cover_image_path %>" alt="<%= p.title %>" class="product-detail-img" />
+      <% } else { %>
+        <div class="product-detail-placeholder"><%= p.title %></div>
+      <% } %>
+    </div>
+    <div class="product-detail-copy">
+      <h2><%= p.title %></h2>
+      <% if (p.tech_stack) { %>
+        <p class="tech-stack-tag"><%= p.tech_stack %></p>
+      <% } %>
+      <% if (p.summary) { %>
+        <p class="product-detail-summary"><%= p.summary %></p>
+      <% } %>
+      <div class="product-detail-content"><%= p.content %></div>
+    </div>
+  </section>
+<% }); %>
+
+<% if (!products.length) { %>
+  <section class="card"><p>Yayında ürün bulunmuyor.</p></section>
+<% } %>
+
+<%- include("../partials/footer") %>

@@ -1,0 +1,48 @@
+<% const useSipSeaPublicChrome = !isAdminRoute && !isAuthRoute; %>
+<!doctype html>
+<html lang="tr" class="<%= useSipSeaPublicChrome ? 'dark' : '' %>">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= title %> | SipSea</title>
+    <% if (useSipSeaPublicChrome) { %>
+      <link rel="preconnect" href="https://fonts.googleapis.com" />
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+      <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+        rel="stylesheet"
+      />
+      <script src="https://cdn.tailwindcss.com"></script>
+      <%- include("tailwind-navbar-config") %>
+    <% } %>
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body class="<%= useSipSeaPublicChrome ? 'sipsea-public-page bg-background text-on-surface' : '' %> <%= isAdminRoute ? 'admin-themed' : '' %> <%= isAdminDashboard ? 'admin-dashboard-page' : '' %>">
+    <% if (isAdminRoute) { %>
+      <div class="admin-wave-bg" aria-hidden="true"></div>
+    <% } %>
+    <% if (useSipSeaPublicChrome) { %>
+      <%- include("public-navbar", { navMode: "site" }) %>
+    <% } else { %>
+      <header class="topbar">
+        <div class="<%= (isAuthRoute || isAdminRoute) ? 'nav nav-auth-wide' : 'container nav' %>">
+          <a href="/" class="brand">
+            <img
+              src="/static/images/branding/sipsea-logo.png"
+              alt="SipSea Logo"
+              class="brand-logo"
+            />
+            SipSea Soft
+          </a>
+          <nav>
+            <% if (isAuthRoute) { %>
+              <a class="topbar-action-button" href="/">Ana Sayfa</a>
+            <% } else if (isAdminRoute && currentUser && currentUser.role === "admin") { %>
+              <a class="topbar-action-button" href="/">Ana Sayfa</a>
+              <a class="topbar-danger-button" href="/auth/logout">Çıkış</a>
+            <% } %>
+          </nav>
+        </div>
+      </header>
+    <% } %>
+    <main class="container <%= useSipSeaPublicChrome ? 'sipsea-public-main' : '' %>">

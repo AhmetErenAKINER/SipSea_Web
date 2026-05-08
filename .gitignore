@@ -1,0 +1,18 @@
+# Dependencies
+**/node_modules/
+
+# Secrets & local env
+.env
+*.local
+
+# OS / IDE
+.DS_Store
+Thumbs.db
+.cursor/
+
+# Logs
+npm-debug.log*
+logs/
+
+# Embedded clone (ayri git deposu)
+teacher-reference/

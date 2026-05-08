@@ -1,0 +1,23 @@
+<%- include("../partials/header") %>
+<section class="card">
+  <div class="admin-page-toolbar">
+    <a class="admin-back-link" href="/admin">← Geri</a>
+  </div>
+  <h1>Teklif Talepleri</h1>
+  <% if (!rows.length) { %>
+    <p>Henüz teklif talebi bulunmuyor.</p>
+  <% } %>
+
+  <% rows.forEach(row => { %>
+    <% const statusLabelMap = { new: "Yeni", reviewed: "Incelendi", closed: "Kapatildi" }; %>
+    <article class="list-item">
+      <strong><%= row.full_name %></strong>
+      <p>E-posta: <%= row.email %></p>
+      <p>Proje tipi: <%= row.project_type || "Belirtilmedi" %></p>
+      <p>Bütçe: <%= row.budget_range || "Belirtilmedi" %></p>
+      <p>Durum: <%= statusLabelMap[row.status] || row.status %></p>
+      <small>Tarih: <%= new Date(row.created_at).toLocaleString("tr-TR") %></small>
+    </article>
+  <% }) %>
+</section>
+<%- include("../partials/footer") %>

@@ -1,0 +1,28 @@
+<%- include("../partials/header") %>
+<section class="card">
+  <div class="admin-page-toolbar">
+    <a class="admin-back-link" href="/admin/products">← Geri</a>
+  </div>
+  <h1>Yeni Ürün</h1>
+  <form method="post" action="/admin/products/add">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+    <label>Başlık</label>
+    <input name="title" required />
+
+    <label>Özet</label>
+    <textarea name="summary" rows="2"></textarea>
+
+    <label>Detaylı İçerik</label>
+    <textarea name="content" rows="8" required></textarea>
+
+    <label>Teknoloji Yığını</label>
+    <input name="tech_stack" placeholder="React Native, Node.js, MySQL" />
+
+    <label>Kapak Görseli Yolu (opsiyonel)</label>
+    <input name="cover_image_path" placeholder="/uploads/gallery/ornek.png" />
+
+    <label class="form-checkbox-inline"><input type="checkbox" name="is_published" checked /><span>Yayınlansın</span></label>
+    <button type="submit">Kaydet</button>
+  </form>
+</section>
+<%- include("../partials/footer") %>

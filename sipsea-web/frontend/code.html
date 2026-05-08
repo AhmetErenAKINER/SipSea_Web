@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SipSea Soft | Next Generation Software Excellence</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary-container": "#2f486a",
+                        "primary-fixed": "#d9e4ed",
+                        "on-error": "#690005",
+                        "on-background": "#e2e2e2",
+                        "tertiary-container": "#040404",
+                        "surface-container": "#1e2020",
+                        "primary": "#bdc8d1",
+                        "secondary-fixed": "#d4e3ff",
+                        "outline-variant": "#43474a",
+                        "on-tertiary-fixed-variant": "#464747",
+                        "on-primary-fixed": "#131d23",
+                        "background": "#121414",
+                        "tertiary": "#c7c6c6",
+                        "surface-container-highest": "#333535",
+                        "on-primary": "#283239",
+                        "inverse-on-surface": "#2f3131",
+                        "secondary": "#afc8f0",
+                        "on-surface-variant": "#c4c7ca",
+                        "error-container": "#93000a",
+                        "surface-bright": "#37393a",
+                        "primary-container": "#00050a",
+                        "on-surface": "#e2e2e2",
+                        "error": "#ffb4ab",
+                        "tertiary-fixed": "#e4e2e2",
+                        "surface-container-low": "#1a1c1c",
+                        "secondary-fixed-dim": "#afc8f0",
+                        "on-tertiary-container": "#777777",
+                        "tertiary-fixed-dim": "#c7c6c6",
+                        "surface-variant": "#333535",
+                        "surface-container-lowest": "#0c0f0f",
+                        "surface-dim": "#121414",
+                        "outline": "#8e9195",
+                        "on-tertiary-fixed": "#1b1c1c",
+                        "surface-tint": "#bdc8d1",
+                        "on-primary-fixed-variant": "#3e484f",
+                        "on-secondary-container": "#9eb7de",
+                        "on-secondary-fixed": "#001c3a",
+                        "inverse-surface": "#e2e2e2",
+                        "on-error-container": "#ffdad6",
+                        "on-secondary": "#163152",
+                        "surface": "#121414",
+                        "surface-container-high": "#282a2b",
+                        "on-secondary-fixed-variant": "#2f486a",
+                        "inverse-primary": "#556067",
+                        "primary-fixed-dim": "#bdc8d1",
+                        "on-tertiary": "#303031",
+                        "on-primary-container": "#6e7880"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "unit": "4px",
+                        "gutter": "24px",
+                        "bento-gap": "16px",
+                        "margin": "48px"
+                    },
+                    "fontFamily": {
+                        "headline-lg": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "label-caps": ["Inter"],
+                        "headline-xl": ["Inter"],
+                        "body-md": ["Inter"],
+                        "headline-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-lg": ["48px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                        "body-lg": ["18px", {"lineHeight": "1.6", "letterSpacing": "0em", "fontWeight": "400"}],
+                        "label-caps": ["12px", {"lineHeight": "1.0", "letterSpacing": "0.1em", "fontWeight": "600"}],
+                        "headline-xl": ["80px", {"lineHeight": "1.1", "letterSpacing": "-0.04em", "fontWeight": "700"}],
+                        "body-md": ["16px", {"lineHeight": "1.5", "letterSpacing": "0em", "fontWeight": "400"}],
+                        "headline-md": ["32px", {"lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "600"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            background-color: #121414; /* surface */
+            color: #e2e2e2; /* on-surface */
+            overflow-x: hidden;
+            transition: background-color 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .glass-panel {
+            background: rgba(30, 32, 32, 0.4); /* surface-container with alpha */
+            backdrop-filter: blur(25px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        }
+        .frosted-water {
+            background: linear-gradient(135deg, rgba(189, 200, 209, 0.03) 0%, rgba(18, 20, 20, 0.6) 100%);
+            border: 1px solid rgba(189, 200, 209, 0.08);
+        }
+        /* Diving Light Simulation */
+        .diving-glow {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 2;
+            background: radial-gradient(circle at 50% 0%, rgba(189, 200, 209, 0.12) 0%, transparent 70%);
+            mix-blend-mode: soft-light;
+        }
+        /* Elements emerging from darkness */
+        .attenuation-mask {
+            mask-image: radial-gradient(circle at 50% var(--mask-y, -20%), black 0%, transparent 80%);
+            -webkit-mask-image: radial-gradient(circle at 50% var(--mask-y, -20%), black 0%, transparent 80%);
+        }
+        .depth-wrapper {
+            background: transparent;
+            position: relative;
+        }
+        .seigaiha-pattern {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.15;
+            background-image: url(https://lh3.googleusercontent.com/aida/ADBb0uiykVxtnC9wy270I8hKj3BL7pBgdhrJkMipEDA5k2HM0wsrB7XZ5MPXErHu7v2FDcRIrY6ESnMkGXdRnURxJZ_fF29OytdW4NF0NE_NHhRMuHDecMOaTKCxA_1LMyI28hi3hp56to8gcchfZg2NbcrUQ17B_uhx-GD1_7rcRIsUuBxg_1JufDhtS7W6qUAOZMEU7YETOY5QcnF1WVphBX1KHyOh0UOXydOr9Xj_f6pY2nX_gSa6NzS5l6CqAh20Dz3DADMbsfp0);
+            background-size: 400px;
+            background-repeat: repeat;
+            mask-image: linear-gradient(to bottom, black 0%, transparent 100%);
+            -webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 100%);
+        }
+        .hero-wave-graphic {
+            position: absolute;
+            top: 10%;
+            right: -5%;
+            width: 70%;
+            max-width: 1200px;
+            opacity: 0.25;
+            z-index: 0;
+            filter: contrast(1.1) brightness(1.2) grayscale(0.5);
+            pointer-events: none;
+            mask-image: radial-gradient(circle at center, black 0%, transparent 80%);
+            -webkit-mask-image: radial-gradient(circle at center, black 0%, transparent 80%);
+        }
+        .atmospheric-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 50% -20%, rgba(189, 200, 209, 0.08) 0%, transparent 80%);
+            pointer-events: none;
+            z-index: 1;
+        }
+        .wave-divider {
+            position: relative;
+            height: 150px;
+            width: 100%;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+            margin-top: -75px;
+            margin-bottom: -75px;
+            z-index: 15;
+            pointer-events: none;
+        }
+        .wave-bottom {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%231a1c1c' fill-opacity='1' d='M0,160L48,176C96,192,192,224,288,213.3C384,203,480,149,576,149.3C672,149,768,203,864,224C960,245,1056,235,1152,202.7C1248,171,1344,117,1392,90.7L1440,64L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E");
+        }
+        .wave-middle {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%230c0f0f' fill-opacity='1' d='M0,224L60,202.7C120,181,240,139,360,138.7C480,139,600,181,720,208C840,235,960,245,1080,224C1200,203,1320,149,1380,122.7L1440,96L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z'%3E%3C/path%3E%3C/svg%3E");
+        }
+        .material-symbols-outlined {
+            font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+        }
+    </style>
+</head>
+<body class="font-body-md antialiased" style="background-color: #121414;">
+<div class="seigaiha-pattern" id="seigaiha"></div>
+<div class="diving-glow" id="divingGlow"></div>
+<div class="atmospheric-overlay" id="atmos" style="opacity: 1;"></div>
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full flex justify-between items-center px-8 h-16 z-50 bg-surface-container-lowest/40 backdrop-blur-xl border-b border-white/5">
+<div class="text-xl font-bold text-on-surface font-inter tracking-tight">SipSea Soft</div>
+<div class="hidden md:flex gap-8 items-center">
+<a class="text-on-surface border-b-2 border-primary pb-1 font-inter tracking-tight duration-300 ease-in-out" href="#">Home</a>
+<a class="text-on-surface-variant hover:text-on-surface transition-colors font-inter tracking-tight duration-300 ease-in-out" href="#products">Products</a>
+<a class="text-on-surface-variant hover:text-on-surface transition-colors font-inter tracking-tight duration-300 ease-in-out" href="#founders">Founders</a>
+<a class="text-on-surface-variant hover:text-on-surface transition-colors font-inter tracking-tight duration-300 ease-in-out" href="#contact">Contact</a>
+</div>
+<button class="bg-primary text-on-primary px-6 py-2 rounded-full font-label-caps hover:brightness-110 transition-all">Get Started</button>
+</nav>
+<div class="depth-wrapper">
+<!-- Hero Section -->
+<section class="relative min-h-[1024px] flex flex-col justify-center px-8 pt-32 pb-16 overflow-hidden">
+<img alt="Traditional Wave Graphic" class="hero-wave-graphic" id="heroWave" src="https://lh3.googleusercontent.com/aida/ADBb0uiykVxtnC9wy270I8hKj3BL7pBgdhrJkMipEDA5k2HM0wsrB7XZ5MPXErHu7v2FDcRIrY6ESnMkGXdRnURxJZ_fF29OytdW4NF0NE_NHhRMuHDecMOaTKCxA_1LMyI28hi3hp56to8gcchfZg2NbcrUQ17B_uhx-GD1_7rcRIsUuBxg_1JufDhtS7W6qUAOZMEU7YETOY5QcnF1WVphBX1KHyOh0UOXydOr9Xj_f6pY2nX_gSa6NzS5l6CqAh20Dz3DADMbsfp0"/>
+<div class="max-w-7xl mx-auto w-full relative z-10">
+<div class="max-w-4xl">
+<span class="font-label-caps text-primary uppercase tracking-[0.2em] mb-6 block">Est. 2024</span>
+<h1 class="font-headline-xl text-on-surface mb-8 tracking-tight">Next Generation Software Excellence.</h1>
+<p class="font-body-lg text-on-surface-variant max-w-2xl leading-relaxed">
+                    We engineer digital foundations that balance profound intelligence with future-ready precision. Our mission is to transform complex challenges into seamless, invisible experiences through code that lasts.
+                </p>
+<div class="mt-12 flex gap-6">
+<button class="bg-primary text-on-primary px-8 py-4 rounded-full font-label-caps hover:brightness-110 transition-all shadow-lg shadow-primary/10">Explore Solutions</button>
+<button class="border border-outline-variant text-on-surface px-8 py-4 rounded-full font-label-caps hover:bg-surface-variant/20 transition-all backdrop-blur-sm">Our Thesis</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Wave Divider 1 -->
+<div class="wave-divider wave-bottom"></div>
+<!-- Product Showcase (Bento Grid) -->
+<section class="py-32 px-8 max-w-7xl mx-auto relative z-10 transition-all duration-1000" id="products">
+<div class="mb-16">
+<h2 class="font-headline-lg text-on-surface mb-4 tracking-tight">Product Showcase</h2>
+<p class="font-body-md text-on-surface-variant">The architecture of modern efficiency.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-12 gap-bento-gap auto-rows-[300px]">
+<!-- DealMate Mobile App -->
+<div class="md:col-span-8 md:row-span-2 frosted-water glass-panel p-10 rounded-xl group relative overflow-hidden">
+<div class="relative z-10 h-full flex flex-col">
+<span class="font-label-caps text-primary mb-4 block">MOBILE PLATFORM</span>
+<h3 class="font-headline-md text-on-surface mb-4 tracking-tight">DealMate</h3>
+<p class="font-body-md text-on-surface-variant max-w-md">A sophisticated marketplace engine designed for rapid deployment and high-frequency transactions. Built on a resilient, modular core.</p>
+<div class="mt-auto pt-8">
+<span class="flex items-center gap-2 text-on-surface font-label-caps hover:text-primary transition-colors cursor-pointer">
+                            VIEW CASE STUDY <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</span>
+</div>
+</div>
+<img alt="DealMate App Mockup" class="absolute -bottom-20 -right-20 w-3/4 opacity-40 grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuClRQuxiWImrI7u093ereL-oMcx4ud52CqiLGf-OvQctHI099_dpW15PYEl_QE_qcg7W7o30v10skQ8R9uUL6omG9bDaSZrsJzsEdi7ZZMyzhPjbMvyI_d-9og0m6QJZRWdZRaBpmWUbAb3Gc_5JkrqFMEK5PG278u3SKQYHEE4zttmuDFjASnYHxAEqHorMQo6nnETOLgEw0yUSmtIudHZYz1V1j3O6cWpNNg-Y38x4m8kE6vUQqQlAOCjxfqc4osqWHEhZn2MWRk"/>
+</div>
+<!-- Samsun Akademi Web -->
+<div class="md:col-span-4 md:row-span-1 frosted-water glass-panel p-8 rounded-xl flex flex-col justify-between">
+<div>
+<span class="font-label-caps text-primary mb-2 block">ED-TECH</span>
+<h3 class="font-headline-md text-on-surface tracking-tight">Samsun Akademi</h3>
+</div>
+<p class="font-body-md text-on-surface-variant">Unified learning ecosystem for institutional excellence.</p>
+<div class="border-t border-white/10 pt-4 mt-4">
+<img alt="Samsun Akademi Browser Mockup" class="w-full h-24 object-cover opacity-50 grayscale" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBdW4swIU1-Sfr-cJv-dbven3wy5_3WcUKRJsMjZID84xJa2BJGURxy85_Gbb0oQubsluAHCoF9o0nhTxWVDIA65ssM71jt7B5HhsRqU2EpZ4ve7N9cV1QvW09J0OVcvSS2Wt0OOdfV5V-nSQocj69UfpJzKe2ngBCM_Q6e-4qZfvUpAWata3dyxl4FIvMjPSW4EnJYLLb2Dmk4ptqxkyhtlP49MxVarjSA5K7V0pelK6Wd3Ozm6RUovNyxnPi5gd9RMa5ouI5Dh5g"/>
+</div>
+</div>
+<!-- Feature Grid 3: Precision Analytics -->
+<div class="md:col-span-4 md:row-span-1 frosted-water glass-panel p-8 rounded-xl">
+<div class="h-full flex flex-col justify-center items-center text-center">
+<span class="material-symbols-outlined text-4xl text-primary mb-4">insights</span>
+<h4 class="font-headline-md text-on-surface text-xl tracking-tight">Core Analytics</h4>
+<p class="font-body-md text-on-surface-variant text-sm mt-2">Built-in intelligence for every platform we deploy.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Wave Divider 2 -->
+<div class="wave-divider wave-middle"></div>
+<!-- Founders & Vision -->
+<section class="py-32 relative z-10 transition-all duration-1000" id="founders">
+<div class="px-8 max-w-7xl mx-auto">
+<div class="mb-24 text-center">
+<h2 class="font-headline-xl text-on-surface mb-6 tracking-tight">Our Vision.</h2>
+<p class="font-headline-md text-primary max-w-3xl mx-auto opacity-80 leading-tight">
+                    "We believe software should be as stable as stone and as fluid as thought."
+                </p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+<!-- Samet -->
+<div class="flex flex-col items-center">
+<div class="w-full aspect-[3/4] bg-surface-container-low rounded-xl mb-6 overflow-hidden border border-white/5 grayscale hover:grayscale-0 transition-all duration-500 shadow-2xl">
+<img alt="Samet Portrait" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDrpc7wLF5nRen06jy08Pvm-8UfRSaMSaV4PDpVR_UEEsS3kMYQPNr_suYPt5mUmkg4wIIq1MA4A950ta75jNRVqQf7g8X0KuqoIvzXNS5DMeuMCVqQUhlPpzTUWQfVtl5IMW37u84V0MYJQbPXfUf3pzyE-U9R5T6t6dRVruvttZO59aOEkm8jODXYzPTIew5wB0uAIIogJJw0eR5YpuLmte6PjIf6S4uie3H2KW3vkHbYF8xWeXemHLnMNzLqlX3iidm6uHet3Po"/>
+</div>
+<h4 class="font-headline-md text-2xl text-on-surface tracking-tight">Samet</h4>
+<p class="font-label-caps text-primary mt-1">Chief Architect</p>
+</div>
+<!-- Arda -->
+<div class="flex flex-col items-center mt-12 md:mt-24">
+<div class="w-full aspect-[3/4] bg-surface-container-low rounded-xl mb-6 overflow-hidden border border-white/5 grayscale hover:grayscale-0 transition-all duration-500 shadow-2xl">
+<img alt="Arda Portrait" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDIpIaW3g5v3yGHptMn2INBXj5QLogQxAa2Uiw5eQPdVIbFeqgBPVUd0WinbM0iLp3RPPCJ0mKgixOd9-JYxRPiczoQWO5XRYqtX--ex7e6ZyWVILE9NpvJZ16vcS6-a9aZAO3RkT-JdU1K_4kYSpkahIfuqlQi6zyxoqcmekATvMFJ_DG9iqtRCIL79N7DMR2nCuEGf1pmLKiHVz7SuvwotrL6U4lGiP8npWM67ebU5VeotwMA-gpOHg3ZWztdzn18181P3hJGOEs"/>
+</div>
+<h4 class="font-headline-md text-2xl text-on-surface tracking-tight">Arda</h4>
+<p class="font-label-caps text-primary mt-1">Product Lead</p>
+</div>
+<!-- Eren -->
+<div class="flex flex-col items-center mt-12 md:mt-48">
+<div class="w-full aspect-[3/4] bg-surface-container-low rounded-xl mb-6 overflow-hidden border border-white/5 grayscale hover:grayscale-0 transition-all duration-500 shadow-2xl">
+<img alt="Eren Portrait" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAtZ3QNMVKZmr71JRy7FfAeu8fDuAuUpYayb8MT8rghQslFzy1wOknTDmldAQ-7KZ6zSem10pnU1wKTHJ0PVXdbPCoFwxGtLRJp1OWB9UZPPentoj6WbAjdrWaVGkMJTBx0Sl5fL-gB8Vhg631emUNTNmAomWTCRkQcYNZAfuzNHhWDaLIADKVhS4efbwDAXKClNcF3xgqZxw2Ii9-_pWI8O2ISWzzYjM-uhxzwVsral4PcaX09KxkT1icf9GTZKZi8gowG1JRM9Ak"/>
+</div>
+<h4 class="font-headline-md text-2xl text-on-surface tracking-tight">Eren</h4>
+<p class="font-label-caps text-primary mt-1">Head of Engineering</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Contact Form -->
+<section class="py-32 px-8 bg-surface-container-lowest relative z-20" id="contact">
+<div class="glass-panel p-16 rounded-xl border border-white/5 max-w-3xl mx-auto shadow-[0_0_50px_rgba(0,0,0,0.8)]">
+<div class="mb-12">
+<h2 class="font-headline-md text-on-surface mb-4 tracking-tight">Start a Project.</h2>
+<p class="font-body-md text-on-surface-variant">Tell us about your mission. We'll handle the architecture.</p>
+</div>
+<form class="space-y-8">
+<div>
+<label class="font-label-caps text-primary block mb-2">FULL NAME</label>
+<input class="w-full bg-transparent border-b border-outline-variant focus:border-primary py-3 px-0 text-on-surface outline-none transition-all placeholder:text-surface-bright" placeholder="John Doe" type="text"/>
+</div>
+<div>
+<label class="font-label-caps text-primary block mb-2">EMAIL ADDRESS</label>
+<input class="w-full bg-transparent border-b border-outline-variant focus:border-primary py-3 px-0 text-on-surface outline-none transition-all placeholder:text-surface-bright" placeholder="john@example.com" type="email"/>
+</div>
+<div>
+<label class="font-label-caps text-primary block mb-2">BRIEF</label>
+<textarea class="w-full bg-transparent border-b border-outline-variant focus:border-primary py-3 px-0 text-on-surface outline-none transition-all placeholder:text-surface-bright resize-none" placeholder="Describe the problem we're solving..." rows="4"></textarea>
+</div>
+<button class="w-full bg-primary text-on-primary py-4 rounded-full font-label-caps hover:brightness-110 transition-all uppercase tracking-widest mt-8">Send Request</button>
+</form>
+</div>
+</section>
+</div>
+<!-- Footer -->
+<footer class="bg-surface-container-lowest w-full py-12 border-t border-white/5 relative z-10">
+<div class="max-w-7xl mx-auto px-8 flex flex-col items-center gap-8">
+<div class="text-lg font-semibold text-on-surface font-inter tracking-tight">SipSea Soft</div>
+<div class="flex gap-8">
+<a class="text-on-surface-variant hover:text-on-surface transition-colors font-inter text-sm duration-200" href="#">Privacy Policy</a>
+<a class="text-on-surface-variant hover:text-on-surface transition-colors font-inter text-sm duration-200" href="#">Terms of Service</a>
+</div>
+<div class="text-on-surface-variant font-inter text-sm">© 2024 SipSea Soft. All rights reserved.</div>
+</div>
+</footer>
+<script>
+    window.addEventListener('scroll', () => {
+        const scrollY = window.scrollY;
+        const windowHeight = window.innerHeight;
+        const docHeight = document.documentElement.scrollHeight;
+        const scrollPercent = scrollY / (docHeight - windowHeight);
+        
+        // --- 1. Background Color Transition (Diving into Deep Sea) ---
+        // From surface (#121414) to abyss (#000000)
+        const baseR = 18, baseG = 20, baseB = 20; // #121414
+        const abyssR = 0, abyssG = 0, abyssB = 0; // Pitch Black
+        
+        // Slower transition to black to feel deeper
+        const divingProgress = Math.min(1, scrollPercent * 1.5);
+        const r = Math.max(abyssR, Math.floor(baseR - (baseR - abyssR) * divingProgress));
+        const g = Math.max(abyssG, Math.floor(baseG - (baseG - abyssG) * divingProgress));
+        const b = Math.max(abyssB, Math.floor(baseB - (baseB - abyssB) * divingProgress));
+        document.body.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
+
+        // --- 2. Floating Lights and Glow ---
+        const divingGlow = document.getElementById('divingGlow');
+        const atmos = document.getElementById('atmos');
+        
+        if (divingGlow) {
+            // Glow dims as we go deeper, simulating light attenuation
+            divingGlow.style.opacity = Math.max(0, 1 - (scrollPercent * 1.8));
+        }
+
+        if (atmos) {
+            atmos.style.opacity = Math.max(0, 1 - (scrollPercent * 2.5));
+        }
+
+        // --- 3. Pattern and Wave Left Behind at Surface ---
+        const seigaiha = document.getElementById('seigaiha');
+        const heroWave = document.getElementById('heroWave');
+        
+        const surfaceFade = Math.max(0, 1 - (scrollPercent * 4)); // Very fast fade to simulate leaving surface
+        
+        if (seigaiha) {
+            seigaiha.style.opacity = 0.15 * surfaceFade;
+            seigaiha.style.transform = `translateY(${scrollY * 0.15}px)`; // Parallax upwards
+        }
+
+        if (heroWave) {
+            heroWave.style.opacity = 0.25 * surfaceFade;
+            heroWave.style.transform = `translateY(${scrollY * 0.25}px) scale(${1 + scrollPercent * 0.1})`;
+        }
+
+        // --- 4. Section Lighting Attenuation ---
+        // Dynamically update CSS variables for sections
+        const sections = ['products', 'founders'];
+        sections.forEach(id => {
+            const el = document.getElementById(id);
+            if (el) {
+                const rect = el.getBoundingClientRect();
+                // If the section is approaching the viewport center
+                const visibility = Math.min(1, Math.max(0, 1 - Math.abs(rect.top) / windowHeight));
+                el.style.opacity = 0.4 + (visibility * 0.6);
+            }
+        });
+    });
+</script>
+</body></html>

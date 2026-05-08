@@ -1,0 +1,25 @@
+<%- include("../partials/header") %>
+<section class="card">
+  <div class="admin-page-toolbar">
+    <a class="admin-back-link" href="/admin">← Geri</a>
+  </div>
+  <h1>Ürünler</h1>
+  <p><a href="/admin/products/add">Yeni ürün ekle</a></p>
+  <% rows.forEach(row => { %>
+    <article class="list-item">
+      <strong><%= row.title %></strong>
+      <p><%= row.summary || "" %></p>
+      <small>Teknoloji: <%= row.tech_stack || "Belirtilmedi" %></small>
+      <p>Slug: <code><%= row.slug %></code></p>
+      <div class="admin-product-actions">
+        <a class="admin-edit-product-link" href="/admin/products/edit/<%= row.id %>">Düzenle</a>
+        <form method="post" action="/admin/products/delete" class="inline-delete-form" onsubmit="return confirm('Bu urunu silmek istediginize emin misiniz?');">
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+          <input type="hidden" name="product_id" value="<%= row.id %>" />
+          <button type="submit">Urunu Sil</button>
+        </form>
+      </div>
+    </article>
+  <% }) %>
+</section>
+<%- include("../partials/footer") %>

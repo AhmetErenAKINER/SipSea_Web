@@ -1,0 +1,43 @@
+<%- include("../partials/header") %>
+<section class="card">
+  <div class="admin-page-toolbar">
+    <a class="admin-back-link" href="/admin">← Geri</a>
+  </div>
+  <h1>Site Ayarlari</h1>
+  <form method="post" action="/admin/settings">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+    <h2>Anasayfa metinleri</h2>
+    <label>Ust rozet metni (Anasayfa - Kurulus 2026)</label>
+    <input name="hero_badge_text" value="<%= settings.hero_badge_text %>" />
+    <label>Ana baslik metni (Anasayfa ana yazi)</label>
+    <input name="hero_title_text" value="<%= settings.hero_title_text %>" />
+    <label>Ana aciklama metni (Anasayfa ana paragraf)</label>
+    <textarea name="hero_description_text" rows="3"><%= settings.hero_description_text %></textarea>
+    <label>Urunler bolumu basligi (Urun Vitrini)</label>
+    <input name="products_section_title" value="<%= settings.products_section_title %>" />
+    <label>Urunler bolumu aciklamasi</label>
+    <textarea name="products_section_description" rows="2"><%= settings.products_section_description %></textarea>
+    <label>Kurucular bolumu basligi (Vizyonumuz)</label>
+    <input name="founders_section_title" value="<%= settings.founders_section_title %>" />
+    <label>Teklif bolumu basligi (Projeni Baslat)</label>
+    <input name="quote_section_title" value="<%= settings.quote_section_title %>" />
+    <label>Teklif bolumu aciklamasi</label>
+    <textarea name="quote_section_description" rows="2"><%= settings.quote_section_description %></textarea>
+    <label>Alt bilgi telif metni (Footer)</label>
+    <input name="footer_copyright_text" value="<%= settings.footer_copyright_text %>" />
+
+    <h2>Iletisim bilgileri</h2>
+    <label>Iletisim e-posta</label>
+    <input name="contact_email" value="<%= settings.contact_email %>" />
+    <label>Iletisim telefon</label>
+    <input name="contact_phone" value="<%= settings.contact_phone %>" />
+    <label>Iletisim adres</label>
+    <input name="contact_address" value="<%= settings.contact_address %>" />
+
+    <h2>Diger</h2>
+    <label>Hakkimizda metni</label>
+    <textarea name="about_text" rows="4"><%= settings.about_text %></textarea>
+    <button type="submit">Guncelle</button>
+  </form>
+</section>
+<%- include("../partials/footer") %>

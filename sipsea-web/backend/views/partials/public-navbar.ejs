@@ -1,6 +1,10 @@
-<% const isLanding = typeof navMode === "string" && navMode === "landing"; %>
+<% 
+  const isLanding = typeof navMode === "string" && navMode === "landing";
+  const path = typeof currentPath !== "undefined" ? currentPath : "";
+  const pill = "nav-pill-link text-on-surface-variant hover:text-on-surface transition-colors font-inter tracking-tight duration-300 ease-in-out";
+%>
 <nav
-  class="home-top-navbar fixed top-0 w-full flex justify-between items-center px-8 h-16 z-50 overflow-visible bg-surface-container-lowest/40 backdrop-blur-xl border-b border-white/5 font-inter"
+  class="home-top-navbar <%= isLanding ? 'home-top-navbar--landing' : '' %> fixed top-0 w-full flex justify-between items-center px-8 h-16 z-50 overflow-visible bg-surface-container-lowest/40 backdrop-blur-xl border-b border-white/5 font-inter"
 >
   <% if (isLanding) { %>
     <div
@@ -29,21 +33,19 @@
   <div class="home-nav-links hidden md:flex gap-8 items-center relative z-[60]">
     <% if (isLanding) { %>
       <a
-        class="js-nav-link is-active text-on-surface-variant hover:text-on-surface font-inter tracking-tight duration-300 ease-in-out"
+        class="<%= pill %>"
         href="#top"
-        data-nav-target="top"
         >Ana Sayfa</a>
     <% } else { %>
       <a
-        class="text-on-surface-variant hover:text-on-surface transition-colors font-inter tracking-tight duration-300 ease-in-out"
+        class="<%= pill %> <%= path === '/' ? 'is-active' : '' %>"
         href="/"
         >Ana Sayfa</a>
     <% } %>
     <span class="relative nav-products-dropdown inline-flex items-center">
       <a
-        class="<%= isLanding ? 'js-nav-link ' : '' %>nav-products-trigger text-on-surface-variant hover:text-on-surface transition-colors font-inter tracking-tight duration-300 ease-in-out <%= (!isLanding && currentPath === '/urunler') ? 'text-on-surface border-b-2 border-primary pb-1' : (isLanding ? '' : 'border-b-2 border-transparent pb-1') %>"
-        href="<%= isLanding ? '#products' : '/#products' %>"
-        <%= isLanding ? 'data-nav-target="products"' : '' %>
+        class="<%= pill %> nav-products-trigger <%= !isLanding && path === '/urunler' ? 'is-active' : '' %>"
+        href="<%= isLanding ? '#products' : '/urunler' %>"
         >Ürünler</a>
       <nav
         class="nav-products-menu-desktop text-left shadow-2xl font-sans"
@@ -57,19 +59,16 @@
       </nav>
     </span>
     <a
-      class="<%= isLanding ? 'js-nav-link ' : '' %>text-on-surface-variant hover:text-on-surface transition-colors font-inter tracking-tight duration-300 ease-in-out"
-      href="<%= isLanding ? '#founders' : '/#founders' %>"
-      <%= isLanding ? 'data-nav-target="founders"' : '' %>
+      class="<%= pill %> <%= !isLanding && path === '/kurucular' ? 'is-active' : '' %>"
+      href="<%= isLanding ? '#founders' : '/kurucular' %>"
       >Kurucular</a>
     <a
-      class="<%= isLanding ? 'js-nav-link ' : '' %>text-on-surface-variant hover:text-on-surface transition-colors font-inter tracking-tight duration-300 ease-in-out"
+      class="<%= pill %>"
       href="<%= isLanding ? '#quote' : '/#quote' %>"
-      <%= isLanding ? 'data-nav-target="quote"' : '' %>
       >Teklif Ver</a>
     <a
-      class="<%= isLanding ? 'js-nav-link ' : '' %>text-on-surface-variant hover:text-on-surface transition-colors font-inter tracking-tight duration-300 ease-in-out"
-      href="<%= isLanding ? '#contact-info' : '/#contact-info' %>"
-      <%= isLanding ? 'data-nav-target="contact-info"' : '' %>
+      class="<%= pill %> <%= !isLanding && path === '/iletisim' ? 'is-active' : '' %>"
+      href="<%= isLanding ? '#contact-info' : '/iletisim' %>"
       >İletişim</a>
   </div>
   <a

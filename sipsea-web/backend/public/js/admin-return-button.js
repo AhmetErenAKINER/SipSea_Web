@@ -1,6 +1,6 @@
 /**
  * Admin Panel / Admin Girişi düğmesi: panelden gelindiyse ana sayfada history.back ile dön.
- * Kullanıldığı yerler: partials/footer.ejs, public/home.ejs (home-landing.js ile birlikte).
+ * Kullanıldığı yerler: partials/footer.ejs, public/home.ejs.
  */
 (function () {
   "use strict";

@@ -7,8 +7,14 @@ Bu proje, derste anlatilan yapıya uygun olarak `router-controller-middleware-mo
 1. `cp .env.example .env` (Windows icin dosyayi kopyalayin)
 2. `npm install`
 3. MySQL'de `model/schema.sql` dosyasini calistirin (mevcut veritabani varsa yeni tablolarin olusmasi icin tekrar calistirin)
-4. `npm run seed:admin`
+4. `npm run seed:admin` (tek kurulum scripti: `scripts/seed-admin.js`)
 5. `npm run dev`
+
+## Notlar
+
+- `public/js/home-parallax.js` anasayfa scroll parallax (dalga / katman solmasi).
+- `public/js/admin-return-button.js` navbar admin dugmesi (footer + anasayfa).
+- `frontend/DESIGN.md` tasarim token referansi; canli sayfa `home.ejs`.
 
 ## Ilk Admin Girisi
 

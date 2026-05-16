@@ -1,3 +1,6 @@
+/**
+ * SEO: /sitemap.xml — controller/sitemap.js dinamik XML üretir.
+ */
 const express = require("express");
 const controller = require("../controller/sitemap");
 

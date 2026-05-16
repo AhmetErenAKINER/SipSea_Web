@@ -13,10 +13,15 @@
       <p>Slug: <code><%= row.slug %></code></p>
       <div class="admin-product-actions">
         <a class="admin-edit-product-link" href="/admin/products/edit/<%= row.id %>">Düzenle</a>
-        <form method="post" action="/admin/products/delete" class="inline-delete-form" onsubmit="return confirm('Bu urunu silmek istediginize emin misiniz?');">
+        <form
+          method="post"
+          action="/admin/products/delete"
+          class="inline-delete-form js-admin-confirm-form"
+          data-confirm="Bu ürünü silmek istediğinize emin misiniz?"
+        >
           <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
           <input type="hidden" name="product_id" value="<%= row.id %>" />
-          <button type="submit">Urunu Sil</button>
+          <button type="submit">Ürünü Sil</button>
         </form>
       </div>
     </article>

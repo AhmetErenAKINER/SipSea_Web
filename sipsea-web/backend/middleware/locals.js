@@ -1,3 +1,7 @@
+/**
+ * Tüm EJS şablonlarına ortak değişkenler: giriş yapan kullanıcı, aktif path,
+ * navbar/layout'ta admin veya auth sayfası bayrakları.
+ */
 module.exports = (req, res, next) => {
   res.locals.currentUser = req.session.user || null;
   res.locals.currentPath = req.path || "";

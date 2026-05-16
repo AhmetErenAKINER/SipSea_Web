@@ -1,3 +1,7 @@
+/**
+ * Oturumdaki kullanıcının rolünü kontrol eden route guard factory.
+ * Örnek: hasRole('admin') — yalnızca admin erişir.
+ */
 module.exports = (...roles) => {
   return (req, res, next) => {
     const role = req.session.user?.role;

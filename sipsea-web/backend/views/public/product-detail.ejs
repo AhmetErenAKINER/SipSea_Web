@@ -1,0 +1,27 @@
+<%- include("../partials/header") %>
+
+<section class="product-detail-strip">
+  <div class="product-detail-media frosted-pane">
+    <% if (product.cover_image_path) { %>
+      <img src="<%= product.cover_image_path %>" alt="<%= product.title %>" class="product-detail-img" />
+    <% } else { %>
+      <div class="product-detail-placeholder"><%= product.title %></div>
+    <% } %>
+  </div>
+  <div class="product-detail-copy">
+    <nav class="public-page-toolbar" aria-label="Sayfa gezintisi">
+      <a href="/urunler" class="public-back-link">← Tüm ürünler</a>
+      <a href="/" class="public-back-link public-back-link--muted">Ana sayfa</a>
+    </nav>
+    <h1><%= product.title %></h1>
+    <% if (product.tech_stack) { %>
+      <p class="tech-stack-tag"><%= product.tech_stack %></p>
+    <% } %>
+    <% if (product.summary) { %>
+      <p class="product-detail-summary"><%= product.summary %></p>
+    <% } %>
+    <div class="product-detail-content"><%= product.content %></div>
+  </div>
+</section>
+
+<%- include("../partials/footer") %>

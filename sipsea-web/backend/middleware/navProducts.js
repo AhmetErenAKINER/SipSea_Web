@@ -1,6 +1,9 @@
+/**
+ * Üst menüdeki ürün alt listesi için son 3 yayınlanmış ürünü yükler.
+ * Admin/auth sayfalarında sorgu atılmaz (navbar farklı layout kullanır).
+ */
 const db = require("../model/db");
 
-/** En güncel 3 yayınlanmış ürün — navbar alt menüsü için */
 module.exports = async (req, res, next) => {
   const url = req.originalUrl || "";
   if (url.startsWith("/admin") || url.startsWith("/auth")) {

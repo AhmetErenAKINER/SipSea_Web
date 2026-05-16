@@ -2,9 +2,9 @@
 <div class="login-wave-bg" aria-hidden="true"></div>
 <section class="login-screen">
   <section class="card narrow login-card">
-    <h1>Admin Giriş</h1>
+    <h1>Admin Girişi</h1>
     <% if (message) { %><p class="alert"><%= message %></p><% } %>
-    <form method="post" action="/auth/login">
+    <form method="post" action="/auth/login<%= returnUrl ? '?url=' + encodeURIComponent(returnUrl) : '' %>">
       <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
       <label>E-posta</label>
       <input type="email" name="email" required />

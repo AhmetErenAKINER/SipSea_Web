@@ -1,7 +1,6 @@
 /**
- * views/public/home.ejs — yalnızca scroll parallax: arka plan rengi, dalga ve
- * dekoratif katmanların kaydırmayla yavaşça solması / hareket etmesi.
- * Üst menü scroll-spy burada yok.
+ * Anasayfa scroll parallax: arka plan rengi, dalga katmanları ve derinlik opaklığı kaydırmaya bağlanır.
+ * requestAnimationFrame ile scroll handler throttle edilir.
  */
 (function () {
   "use strict";
@@ -44,8 +43,7 @@
       abyssB,
       Math.floor(baseB - (baseB - abyssB) * divingProgress)
     );
-    document.body.style.backgroundColor =
-      "rgb(" + r + "," + g + "," + b + ")";
+    document.body.style.backgroundColor = "rgb(" + r + "," + g + "," + b + ")";
 
     var divingGlow = document.getElementById("divingGlow");
     var atmos = document.getElementById("atmos");

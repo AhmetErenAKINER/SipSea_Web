@@ -1,3 +1,7 @@
+/**
+ * express-session yapılandırması.
+ * saveUninitialized: false — boş oturum çerezi oluşturulmaz (gereksiz session satırı yok).
+ */
 const session = require("express-session");
 
 module.exports = session({

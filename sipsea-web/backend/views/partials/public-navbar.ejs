@@ -44,31 +44,35 @@
     <% } %>
     <span class="relative nav-products-dropdown inline-flex items-center">
       <a
-        class="<%= pill %> nav-products-trigger <%= !isLanding && path === '/urunler' ? 'is-active' : '' %>"
-        href="<%= isLanding ? '#products' : '/urunler' %>"
+        class="<%= pill %> nav-products-trigger <%= !isLanding && (path === '/urunler' || path.startsWith('/urunler/')) ? 'is-active' : '' %>"
+        href="<%= isLanding ? '#products' : '/#products' %>"
         >Ürünler</a>
       <nav
         class="nav-products-menu-desktop text-left shadow-2xl font-sans"
         aria-label="Ürünler alt menüsü"
       >
         <% ((typeof navProducts !== "undefined" && navProducts) ? navProducts : []).forEach(p => { %>
-          <a href="<%= isLanding ? '#' + p.slug : '/#' + p.slug %>"><%= p.title %></a>
+          <a href="<%= isLanding ? '#' + p.slug : '/urunler/' + p.slug %>"><%= p.title %></a>
         <% }) %>
         <hr class="nav-submenu-divider" />
         <a href="/urunler">Ürünlerimiz</a>
       </nav>
     </span>
     <a
-      class="<%= pill %> <%= !isLanding && path === '/kurucular' ? 'is-active' : '' %>"
-      href="<%= isLanding ? '#founders' : '/kurucular' %>"
+      class="<%= pill %> <%= !isLanding && path.startsWith('/duyurular') ? 'is-active' : '' %>"
+      href="<%= isLanding ? '#news' : '/duyurular' %>"
+      >Duyurular</a>
+    <a
+      class="<%= pill %>"
+      href="/#founders"
       >Kurucular</a>
     <a
       class="<%= pill %>"
-      href="<%= isLanding ? '#quote' : '/#quote' %>"
+      href="/#quote"
       >Teklif Ver</a>
     <a
-      class="<%= pill %> <%= !isLanding && path === '/iletisim' ? 'is-active' : '' %>"
-      href="<%= isLanding ? '#contact-info' : '/iletisim' %>"
+      class="<%= pill %>"
+      href="/#contact-info"
       >İletişim</a>
   </div>
   <a

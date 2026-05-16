@@ -23,8 +23,13 @@
         <option value="<%= f.id %>"><%= f.full_name %></option>
       <% }) %>
     </select>
-    <label>Gorsel yolu</label>
-    <input name="photo_path" placeholder="/uploads/gallery/ornek.png" required />
+    <label>Galeriden gorsel sec</label>
+    <select name="photo_path" required>
+      <option value="">Seciniz</option>
+      <% rows.forEach(img => { %>
+        <option value="<%= img.file_path %>"><%= img.title %> — <%= img.file_path %></option>
+      <% }) %>
+    </select>
     <button type="submit">Kurucu gorselini guncelle</button>
   </form>
 </section>
@@ -39,8 +44,13 @@
         <option value="<%= p.id %>"><%= p.title %></option>
       <% }) %>
     </select>
-    <label>Kapak gorseli yolu</label>
-    <input name="cover_image_path" placeholder="/uploads/gallery/ornek.png" required />
+    <label>Galeriden kapak gorseli sec</label>
+    <select name="cover_image_path" required>
+      <option value="">Seciniz</option>
+      <% rows.forEach(img => { %>
+        <option value="<%= img.file_path %>"><%= img.title %> — <%= img.file_path %></option>
+      <% }) %>
+    </select>
     <button type="submit">Urun gorselini guncelle</button>
   </form>
 </section>
@@ -61,7 +71,12 @@
               <input type="hidden" name="file_path" value="<%= img.file_path %>" />
               <button type="submit">Gorseli Kaldir</button>
             </form>
-            <form method="post" action="/admin/gallery/delete" onsubmit="return confirm('Bu gorsel veritabanindan silinsin mi?');">
+            <form
+              method="post"
+              action="/admin/gallery/delete"
+              class="js-admin-confirm-form"
+              data-confirm="Bu görsel veritabanından silinsin mi?"
+            >
               <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
               <input type="hidden" name="image_id" value="<%= img.id %>" />
               <input type="hidden" name="file_path" value="<%= img.file_path %>" />

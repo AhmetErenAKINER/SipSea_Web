@@ -1,0 +1,41 @@
+<%- include("../partials/header") %>
+<section class="card">
+  <div class="admin-page-toolbar">
+    <a class="admin-back-link" href="/admin">← Geri</a>
+  </div>
+  <h1>Teklif Yetkili E-postalar</h1>
+  <p>
+    Listedeki aktif e-postalar teklif gönderebilir. Ziyaretçiler kayıtlı olmayan adresle gönderemez; giriş gerekmez.
+  </p>
+  <p><a href="/admin/users/add">Yeni e-posta ekle</a></p>
+  <% if (!rows.length) { %>
+    <p>Henüz kayıtlı e-posta yok.</p>
+  <% } %>
+  <% rows.forEach(row => { %>
+    <article class="list-item">
+      <strong><%= row.email %></strong>
+      <small>Durum: <%= row.is_active ? "Aktif" : "Pasif" %></small>
+      <div class="admin-product-actions">
+        <% if (row.is_active) { %>
+          <form
+            method="post"
+            action="/admin/users/deactivate"
+            class="inline-delete-form js-admin-confirm-form"
+            data-confirm="Bu e-postayi listeden cikarmak istediginize emin misiniz?"
+          >
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+            <input type="hidden" name="user_id" value="<%= row.id %>" />
+            <button type="submit">Pasifleştir</button>
+          </form>
+        <% } else { %>
+          <form method="post" action="/admin/users/activate" class="inline-delete-form">
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+            <input type="hidden" name="user_id" value="<%= row.id %>" />
+            <button type="submit">Aktifleştir</button>
+          </form>
+        <% } %>
+      </div>
+    </article>
+  <% }) %>
+</section>
+<%- include("../partials/footer") %>

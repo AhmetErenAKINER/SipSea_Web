@@ -1,0 +1,18 @@
+<%- include("../partials/header") %>
+<section class="card">
+  <div class="admin-page-toolbar">
+    <a class="admin-back-link" href="/admin/users">← Geri</a>
+  </div>
+  <h1>Teklif Yetkili E-posta Ekle</h1>
+  <p>Bu adrese sahip kişiler teklif formunu gönderebilir. Giriş veya şifre gerekmez.</p>
+  <% if (message) { %>
+    <p class="admin-form-message"><%= message %></p>
+  <% } %>
+  <form method="post" action="/admin/users/add">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+    <label>E-posta</label>
+    <input name="email" type="email" required placeholder="musteri@firma.com" />
+    <button type="submit">Kaydet</button>
+  </form>
+</section>
+<%- include("../partials/footer") %>

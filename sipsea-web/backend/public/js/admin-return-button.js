@@ -1,6 +1,5 @@
 /**
- * Admin Panel / Admin Girişi düğmesi: panelden gelindiyse ana sayfada history.back ile dön.
- * Kullanıldığı yerler: partials/footer.ejs, public/home.ejs.
+ * Admin alt sayfalarda "Geri": aynı origin admin geçmişi varsa history.back(), yoksa dashboard linki.
  */
 (function () {
   "use strict";

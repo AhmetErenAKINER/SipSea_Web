@@ -99,6 +99,8 @@ spacing:
   bento-gap: 16px
 ---
 
+> **Proje notu:** Bu dosya yalnızca tasarım token / metin referansıdır. Çalışan arayüz `backend/views/public/home.ejs` içinde (Tailwind CDN).
+
 ## Brand & Style
 
 The design system is engineered to evoke a sense of profound intelligence, stability, and future-ready precision. It targets a sophisticated audience that values clarity over decoration. The brand personality is "The Quiet Authority"—knowledgeable, calm, and impeccably organized.

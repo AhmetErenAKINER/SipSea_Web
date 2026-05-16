@@ -1,0 +1,30 @@
+<%- include("../partials/header") %>
+<section class="card">
+  <div class="admin-page-toolbar">
+    <a class="admin-back-link" href="/admin/announcements">← Geri</a>
+  </div>
+  <h1>Yeni Duyuru</h1>
+  <form method="post" action="/admin/announcements/add">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+    <label>Başlık</label>
+    <input name="title" required />
+
+    <label>Özet</label>
+    <textarea name="summary" rows="2"></textarea>
+
+    <label>İçerik</label>
+    <textarea name="content" rows="8" required></textarea>
+
+    <label>Kategori</label>
+    <select name="category_id">
+      <option value="">Seçiniz</option>
+      <% categories.forEach(c => { %>
+        <option value="<%= c.id %>"><%= c.name %></option>
+      <% }) %>
+    </select>
+
+    <label class="form-checkbox-inline"><input type="checkbox" name="is_published" checked /><span>Yayınlansın</span></label>
+    <button type="submit">Kaydet</button>
+  </form>
+</section>
+<%- include("../partials/footer") %>

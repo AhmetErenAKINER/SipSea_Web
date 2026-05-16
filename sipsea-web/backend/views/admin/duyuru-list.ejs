@@ -1,0 +1,30 @@
+<%- include("../partials/header") %>
+<section class="card">
+  <div class="admin-page-toolbar">
+    <a class="admin-back-link" href="/admin">← Geri</a>
+  </div>
+  <h1>Duyurular</h1>
+  <p><a href="/admin/announcements/add">Yeni duyuru ekle</a></p>
+  <% rows.forEach(row => { %>
+    <article class="list-item">
+      <strong><%= row.title %></strong>
+      <p><%= row.summary || "" %></p>
+      <small>Kategori: <%= row.category_name || "Belirtilmedi" %> | Yayın: <%= row.is_published ? "Evet" : "Hayır" %></small>
+      <p>Slug: <code><%= row.slug %></code></p>
+      <div class="admin-product-actions">
+        <a class="admin-edit-product-link" href="/admin/announcements/edit/<%= row.id %>">Düzenle</a>
+        <form
+          method="post"
+          action="/admin/announcements/delete"
+          class="inline-delete-form js-admin-confirm-form"
+          data-confirm="Bu duyuruyu silmek istediğinize emin misiniz?"
+        >
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+          <input type="hidden" name="announcement_id" value="<%= row.id %>" />
+          <button type="submit">Sil</button>
+        </form>
+      </div>
+    </article>
+  <% }) %>
+</section>
+<%- include("../partials/footer") %>

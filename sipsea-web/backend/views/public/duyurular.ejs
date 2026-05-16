@@ -1,0 +1,24 @@
+<%- include("../partials/header") %>
+
+<section class="card sipsea-public-section">
+  <nav class="public-page-toolbar" aria-label="Sayfa gezintisi">
+    <a href="/" class="public-back-link">← Ana sayfa</a>
+  </nav>
+  <h1 class="font-headline-lg text-on-surface mb-2">Duyurular ve Haberler</h1>
+  <p class="text-on-surface-variant mb-8">Son duyuru ve haberler.</p>
+  <% rows.forEach(row => { %>
+    <article class="list-item frosted-pane mb-4 p-4 rounded-lg">
+      <h2><a href="/duyurular/<%= row.slug %>"><%= row.title %></a></h2>
+      <% if (row.category_name) { %>
+        <p class="tech-stack-tag"><%= row.category_name %></p>
+      <% } %>
+      <p><%= row.summary || "" %></p>
+      <small><%= new Date(row.created_at).toLocaleDateString("tr-TR") %></small>
+    </article>
+  <% }) %>
+  <% if (!rows.length) { %>
+    <p>Henüz yayınlanmış duyuru yok.</p>
+  <% } %>
+</section>
+
+<%- include("../partials/footer") %>

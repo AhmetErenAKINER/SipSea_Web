@@ -1,8 +1,13 @@
+/**
+ * Galeri görsel yükleme: multer disk storage, MIME ve boyut doğrulaması.
+ * Dosyalar public/uploads/gallery altına timestamp'li isimle yazılır.
+ */
 const multer = require("multer");
 const path = require("path");
 
 const storage = multer.diskStorage({
-  destination: (req, file, cb) => cb(null, path.join(__dirname, "..", "public", "uploads", "gallery")),
+  destination: (req, file, cb) =>
+    cb(null, path.join(__dirname, "..", "public", "uploads", "gallery")),
   filename: (req, file, cb) => {
     const safeName = `${Date.now()}-${file.originalname.replace(/\s+/g, "-").toLowerCase()}`;
     cb(null, safeName);

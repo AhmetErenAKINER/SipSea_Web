@@ -1,3 +1,4 @@
+<%# Kamu + auth dışı: Tailwind navbar (public-navbar); admin/auth: eski topbar %>
 <% const useSipSeaPublicChrome = !isAdminRoute && !isAuthRoute; %>
 <!doctype html>
 <html lang="tr" class="<%= useSipSeaPublicChrome ? 'dark' : '' %>">
@@ -17,7 +18,7 @@
     <% } %>
     <link rel="stylesheet" href="/static/styles.css" />
   </head>
-  <body class="<%= useSipSeaPublicChrome ? 'sipsea-public-page bg-background text-on-surface' : '' %> <%= isAdminRoute ? 'admin-themed' : '' %> <%= isAdminDashboard ? 'admin-dashboard-page' : '' %>">
+  <body class="<%= useSipSeaPublicChrome ? 'sipsea-public-page bg-background text-on-surface' : '' %> <%= isAuthRoute ? 'auth-login-page' : '' %> <%= isAdminRoute ? 'admin-themed' : '' %> <%= isAdminDashboard ? 'admin-dashboard-page' : '' %>" data-route="<%= isAdminRoute ? 'admin' : isAuthRoute ? 'auth' : 'public' %>">
     <% if (isAdminRoute) { %>
       <div class="admin-wave-bg" aria-hidden="true"></div>
     <% } %>

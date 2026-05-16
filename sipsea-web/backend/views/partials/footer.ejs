@@ -1,20 +1,11 @@
     </main>
-    <script>
-      (function () {
-        const adminReturnButton = document.getElementById("adminReturnButton");
-        if (!adminReturnButton) return;
-
-        adminReturnButton.addEventListener("click", function (event) {
-          const ref = document.referrer || "";
-          const sameOrigin = ref.startsWith(window.location.origin);
-          const cameFromAdmin = sameOrigin && ref.includes("/admin");
-
-          if (cameFromAdmin && window.history.length > 1) {
-            event.preventDefault();
-            window.history.back();
-          }
-        });
-      })();
-    </script>
+    <% if (typeof isAdminRoute !== "undefined" && isAdminRoute) { %>
+      <%- include("admin-confirm-modal") %>
+      <script src="/static/js/admin-confirm.js?v=1"></script>
+    <% } %>
+    <% if (typeof isAdminRoute !== "undefined" && !isAdminRoute && typeof isAuthRoute !== "undefined" && !isAuthRoute) { %>
+      <script src="/static/js/online-tab-ping.js?v=1"></script>
+    <% } %>
+    <script src="/static/js/admin-return-button.js?v=1"></script>
   </body>
 </html>

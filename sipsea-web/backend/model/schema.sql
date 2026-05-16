@@ -1,12 +1,15 @@
+-- SipSea Web veritabanı şeması (nihai)
+
 CREATE DATABASE IF NOT EXISTS sipsea_web;
 USE sipsea_web;
 
+-- admin: panel girişi | user: teklif yetkili e-posta (giriş yok)
 CREATE TABLE IF NOT EXISTS users (
   id INT AUTO_INCREMENT PRIMARY KEY,
   full_name VARCHAR(120) NOT NULL,
   email VARCHAR(180) NOT NULL UNIQUE,
   password_hash VARCHAR(255) NOT NULL,
-  role ENUM('visitor', 'user', 'admin') NOT NULL DEFAULT 'user',
+  role ENUM('user', 'admin') NOT NULL DEFAULT 'user',
   is_active TINYINT(1) NOT NULL DEFAULT 1,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
@@ -89,8 +92,8 @@ CREATE TABLE IF NOT EXISTS visitor_ips (
   last_counted_at DATETIME NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS online_sessions (
-  session_id VARCHAR(128) PRIMARY KEY,
+CREATE TABLE IF NOT EXISTS online_tabs (
+  tab_key VARCHAR(64) PRIMARY KEY,
   ip_address VARCHAR(64) NOT NULL,
   last_seen_at DATETIME NOT NULL
 );
@@ -118,5 +121,5 @@ INSERT IGNORE INTO site_settings (setting_key, setting_value) VALUES
 
 INSERT IGNORE INTO founders (id, full_name, role_title, bio, sort_order) VALUES
   (1, 'Samet Karahan', 'Kurucu Ortak · Urun', 'Urun vizyonu ve musterı deneyimi tasarımı.', 1),
-  (2, 'Eren Akiner', 'Kurucu Ortak · Muhendislik', 'Yazilim mimarisi ve teknik operasyon.', 2),
-  (3, 'Arda Atesli', 'Kurucu Ortak · Strateji', 'Is gelistirme ve stratejik planlama.', 3);
+  (2, 'Eren Akıner', 'Kurucu Ortak · Muhendislik', 'Yazilim mimarisi ve teknik operasyon.', 2),
+  (3, 'Arda Ateşli', 'Kurucu Ortak · Strateji', 'Is gelistirme ve stratejik planlama.', 3);

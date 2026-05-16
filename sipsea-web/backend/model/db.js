@@ -1,8 +1,10 @@
+/**
+ * MySQL bağlantı havuzu (mysql2/promise).
+ * Boş DB_PASSWORD ortamında password alanı config'e eklenmez (yerel root için).
+ */
 const mysql = require("mysql2");
 require("dotenv").config();
 
-// DB_PASSWORD bos veya yoksa sifre gonderilmez (XAMPP varsayilan root ile uyumlu).
-// Eskiden || "123456" kullanimi bos .env'de bile yanlis sifre yolluyordu.
 const poolConfig = {
   host: process.env.DB_HOST || "localhost",
   user: process.env.DB_USER || "root",

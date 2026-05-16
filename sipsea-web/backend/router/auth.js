@@ -1,3 +1,6 @@
+/**
+ * Kimlik doğrulama route'ları. Login GET'te csrfLocal ile form token'ı üretilir.
+ */
 const express = require("express");
 const controller = require("../controller/auth");
 const csrfLocal = require("../middleware/csrfLocal");

@@ -1,0 +1,21 @@
+<%- include("../partials/header") %>
+
+<section class="card sipsea-public-section">
+  <nav class="public-page-toolbar" aria-label="Sayfa gezintisi">
+    <a href="/duyurular" class="public-back-link">← Tüm duyurular</a>
+    <a href="/" class="public-back-link public-back-link--muted">Ana sayfa</a>
+  </nav>
+  <% if (announcement.category_name) { %>
+    <p class="tech-stack-tag"><%= announcement.category_name %></p>
+  <% } %>
+  <h1 class="font-headline-lg text-on-surface mb-2"><%= announcement.title %></h1>
+  <% if (announcement.summary) { %>
+    <p class="product-detail-summary text-on-surface-variant"><%= announcement.summary %></p>
+  <% } %>
+  <div class="product-detail-content text-on-surface"><%= announcement.content %></div>
+  <p class="mt-6 opacity-70">
+    <small><%= new Date(announcement.created_at).toLocaleDateString("tr-TR") %></small>
+  </p>
+</section>
+
+<%- include("../partials/footer") %>
